@@ -1,6 +1,33 @@
 const express = require('express');
+const pets = require('./data/pets.json')
 const app = express();
-const port =3000;
+const port =8080;
+const cors = require('cors')()
+const bp = require('body-parser')
+const fetch = require('cross-fetch')
+const asynchanlder = require('express-async-handler')
+
+app.use(bp.json())
+
+async function loadPets() {
+    let response =await fetch('http://localhost:8080/pets');
+    return await response.json();
+}
+
+
+app.get('/pets', (req, res)=> {
+  res.status(200);
+  res.json(pets);
+})
+
+
+app.get('/loadpets', async (req, res) => {
+  res.status(200);
+  console.log(pets2)
+  res.json(pets2)
+})
+
+
 
 app.set('views', __dirname + '/views');
 app.use(express.static('public'))
@@ -8,9 +35,10 @@ app.use(express.static('public'))
 app.set('view engine', 'jsx')
 app.engine('jsx', require('express-react-views').createEngine());
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
     res.status(200);
-    res.render('home');
+    let pets2 = await loadPets();
+    res.render('home', {pets:pets2});
 })
 
 app.get('/edit', (req, res) => {
@@ -30,9 +58,7 @@ app.get('/AddPet', (req, res) => {
 
 app.get('/AddBreed', (req, res) => {
     res.status(200);
-    res.render('AddBreed');
+    res.render('addBreed');
 })
-
-
 
 app.listen(port, () => console.log("Running server"));
