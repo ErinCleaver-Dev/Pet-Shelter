@@ -6,6 +6,20 @@ const cors = require('cors')()
 const bp = require('body-parser')
 const fetch = require('cross-fetch')
 const asynchanlder = require('express-async-handler')
+const mongodb = require('mongodb');
+const MongoClient = mongodb.MongoClient;
+const connectionsStr = 'mongodb://localhost:27017';
+const client = new MongoClient(connectionsStr);
+
+client.connect((error) => {
+    if(error) 
+    {throw new Error(error)} 
+    const db = client.db('petsdb');
+    const pets = db.collection('pets');
+
+})
+
+
 
 app.use(bp.json())
 
