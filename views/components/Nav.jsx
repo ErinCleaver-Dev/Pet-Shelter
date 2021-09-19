@@ -6,8 +6,8 @@ const Nav = () => {
         <nav>
             <ul class="navigation">
                 <li><a href="/">Home Page</a></li>
-                <li><a href="/AddBreed">Add Breed</a></li>
-                <li><a href="/AddPet">Add Pet</a></li>
+                <li><a href="/addBreed">Add Breed</a></li>
+                <li><a href="/addPet">Add Pet</a></li>
             </ul>
         </nav>
         <h1>Pet Shelter</h1>

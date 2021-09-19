@@ -1,0 +1,41 @@
+[{
+  "_id": {
+    "$oid": "6143eb107041a9e7a937e0d4"
+  },
+  "name": "ahmad",
+  "dob": "1-1-1980",
+  "phone": "333-555-6780",
+  "grade": 90.5,
+  "speciality": "programming"
+},{
+  "_id": {
+    "$oid": "6143ebec7041a9e7a937e0d6"
+  },
+  "name": "jimmy",
+  "dob": "1-4-1999",
+  "phone": "333-555-7050"
+},{
+  "_id": {
+    "$oid": "6143ec5e7041a9e7a937e0d7"
+  },
+  "name": "Dave",
+  "dob": "1-1-1980",
+  "phone": "333-555-6780",
+  "grade": 90.5
+},{
+  "_id": {
+    "$oid": "6143f5d1f258f778e93d4d79"
+  },
+  "name": "Tayron",
+  "dob": "1-7-2001",
+  "phone": "444-777-8888",
+  "grade": 75
+},{
+  "_id": {
+    "$oid": "6143f64d03dca7307ad61a12"
+  },
+  "name": "Trant",
+  "dob": "1-7-2001",
+  "phone": "444-777-8888",
+  "grade": 75
+}]

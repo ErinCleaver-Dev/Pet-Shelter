@@ -15,9 +15,9 @@ const Home = (props) => {
             <main>
                 <section className="cats">
                     <ul>
-                        {props.pets.pets.length > 0 ? ( 
+                        {props.pets.length > 0 ? ( 
                                 
-                                props.pets.pets.map(pet => 
+                                props.pets.map(pet => 
                                 <Pet 
                                 key={pet.id} 
                                 name={pet.name} 
