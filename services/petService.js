@@ -9,7 +9,14 @@ async function create(data){
     return await pet.save(pet).then(result => {console.log(`pet saved!! ${result}`)})
 }
 
+async function getId(id) {
+    return await Pet.find({_id: id}).lean();
+}
+
+
+
 module.exports = {
     getAll: getAll,
     create: create,
+    getId: getId,
 }

@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors')()
 const bp = require('body-parser')
+const cp = require('cookie-parser')
 
 const setupExpress = (app) => {
     app.use(bp.urlencoded({extended : false}))
@@ -13,6 +14,7 @@ const setupExpress = (app) => {
     const formData = require('express-form-data');
     app.use(formData.parse())
     app.use(express.json())
+    app.use(cp());
 }
 
 module.exports = setupExpress;
