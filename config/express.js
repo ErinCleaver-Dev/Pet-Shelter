@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors')()
 const bp = require('body-parser')
 const cp = require('cookie-parser')
+const session = require('express-session');
 
 const setupExpress = (app) => {
     app.use(bp.urlencoded({extended : false}))
@@ -15,6 +16,7 @@ const setupExpress = (app) => {
     app.use(formData.parse())
     app.use(express.json())
     app.use(cp());
+    app.use(session({secret: 'fosureowafdvcx'}, {httpOnly: true}, {secure: true}))
 }
 
 module.exports = setupExpress;

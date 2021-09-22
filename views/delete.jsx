@@ -7,7 +7,7 @@ const Delete = ({pet}) => {
     return (
         <DefaultLayout title="Seleter a Cat">
             <Nav/>
-            <form action="#" class="cat-form">
+            <form action="" method="POST" class="cat-form">
                 <h2>Shelter the cat</h2>
                 <img src={pet[0].img} alt=""/>
                 <label for="name">Name</label>

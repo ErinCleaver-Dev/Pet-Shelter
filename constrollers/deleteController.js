@@ -13,5 +13,16 @@ router.get('/delete/:id', (req, res) => {
     }).catch(() => res.status(500).end)
 })
 
+router.post('/delete/:id', (req, res) => {
+    res.status(200);
+    const id = req.params.id.replace(":id=", '')
+    console.log("test delete pet " + id)
+    petService.deletePet(id).then(
+        res.redirect('/')
+    ).catch(() => res.status(500).end)
+
+})
+
+
 
 module.exports = router;

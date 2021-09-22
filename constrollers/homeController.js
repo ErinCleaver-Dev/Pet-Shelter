@@ -6,6 +6,9 @@ const petService = require('../services/petService')
 
 router.get('/', (req, res) => {
     console.log(req.cookies)
+    console.log("Session obj " + req.session)
+    console.log("Session value " + req.session.message)
+
     const notice = req.cookies.notice;
 
     petService.getAll().then(pets => {
@@ -19,6 +22,7 @@ router.get('/clearCookies', (req, res) => {
 })
 router.get('/agreeCookie', (req, res) => {
     res.cookie("notice", "yes");
+    req.session.message = "AddMessage"
     res.redirect('/');
 })
 
