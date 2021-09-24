@@ -4,10 +4,12 @@ import DefaultLayout from './layouts/default'
 
 
 const Delete = ({pet}) => {
+    const deletePet = `/delete/:id=${pet[0]._id}`
+
     return (
         <DefaultLayout title="Seleter a Cat">
             <Nav/>
-            <form action="" method="POST" class="cat-form">
+            <form action="/" method="POST" class="cat-form">
                 <h2>Shelter the cat</h2>
                 <img src={pet[0].img} alt=""/>
                 <label for="name">Name</label>
@@ -20,7 +22,7 @@ const Delete = ({pet}) => {
                 <select id="group" disabled>
                     <option value={pet[0].breed}>{pet[0].breed}</option>
                 </select>
-                <button>SHELTER THE CAT</button>
+                <button><a href={deletePet}>SHELTER THE CAT</a></button>
             </form>
         </DefaultLayout>
     )

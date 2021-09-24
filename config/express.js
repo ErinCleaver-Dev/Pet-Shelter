@@ -3,6 +3,9 @@ const cors = require('cors')()
 const bp = require('body-parser')
 const cp = require('cookie-parser')
 const session = require('express-session');
+const bcrypt = require('bcrypt')
+const passwordUnscure = "78pass55!+"
+const config = require('./')
 
 const setupExpress = (app) => {
     app.use(bp.urlencoded({extended : false}))
@@ -17,6 +20,36 @@ const setupExpress = (app) => {
     app.use(express.json())
     app.use(cp());
     app.use(session({secret: 'fosureowafdvcx'}, {httpOnly: true}, {secure: true}))
+    let hashPassword = "";
+    /*bcrypt.genSaltSync(config.saltRound, (error, salt) => {
+        bcrypt.hash(passwordUnscure, salt, (error, hash) => {
+            console.log(passwordUnscure)
+            hashPassword = hash;
+        })
+    }).then(hash=> {
+        if(passwordUnscure === hashPassword) {
+            console.log('password is true')
+        } else {
+            console.log('incorrct password or username');
+        }
+    })*/
+
+    const salt = bcrypt.genSaltSync(config.saltRound);
+    bcrypt.hash(passwordUnscure, salt).then(hash => {
+
+        // decryption 
+        bcrypt.compare(passwordUnscure, hash, (error, res)=> {
+            if(res) {
+                console.log('password is true')
+            } else {
+                console.log('incorrct username or password');
+            }
+        })
+
+    })
+
+    
+
 }
 
 module.exports = setupExpress;

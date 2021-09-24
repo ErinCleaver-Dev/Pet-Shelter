@@ -14,7 +14,8 @@ async function getId(id) {
 }
 
 async function deletePet(id) {
-    return await Pet.removeById({_id: id});
+    console.log("testing delete " + id);
+    return await Pet.remove({_id: id}).then(result => {console.log("test " + result)});
 }
 
 

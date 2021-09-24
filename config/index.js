@@ -7,7 +7,9 @@ const config = {
     db_name: {
         petsdb: "petsdb"
     },
-    DB_CONNECTION : "mongodb://localhost:27017/petsdb"
+    DB_CONNECTION : "mongodb://localhost:27017/petsdb",
+    secert: 'superSecert123',
+    saltRound: 11
     
 }
 
