@@ -4,7 +4,7 @@ const bp = require('body-parser')
 const cp = require('cookie-parser')
 const session = require('express-session');
 const bcrypt = require('bcrypt')
-const passwordUnscure = "78pass55!+"
+const passwordUnscure = "pass123"
 const config = require('./')
 
 const setupExpress = (app) => {
@@ -36,6 +36,8 @@ const setupExpress = (app) => {
 
     const salt = bcrypt.genSaltSync(config.saltRound);
     bcrypt.hash(passwordUnscure, salt).then(hash => {
+
+        
 
         // decryption 
         bcrypt.compare(passwordUnscure, hash, (error, res)=> {

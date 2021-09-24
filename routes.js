@@ -9,6 +9,7 @@ const addPetController = require('./constrollers/addPetController')
 const addBreedController = require('./constrollers/addBreedController')
 const editController = require('./constrollers/editController')
 const deleteController = require('./constrollers/deleteController')
+const userController = require('./constrollers/userController')
 
 
 
@@ -22,6 +23,7 @@ router.use(addPetController)
 router.use(addBreedController)
 router.use(editController)
 router.use(deleteController)
+router.use(userController)
 
 module.exports = router;
 
