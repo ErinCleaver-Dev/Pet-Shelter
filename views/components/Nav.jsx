@@ -13,10 +13,6 @@ const Nav = () => {
             </ul>
         </nav>
         <h1>Pet Shelter</h1>
-        <form action="/search">
-            <input type="text"/>
-            <button type="button">Search</button>
-        </form>
         </header>
     )
 }

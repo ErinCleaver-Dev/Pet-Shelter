@@ -1,5 +1,7 @@
 import React from 'react';
 import Nav from './components/Nav'
+import Search from './components/Search'
+
 import DefaultLayout from './layouts/default'
 import Pet from './components/Pet'
 // import pets from '../data/pets.json'
@@ -13,6 +15,7 @@ const Home = (props) => {
     return (
         <DefaultLayout title="Home">
             <Nav/>
+            <Search/>
             <main>
                 <section className="cats">
                     <ul>
