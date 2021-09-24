@@ -8,15 +8,15 @@ const Register = () => {
         <DefaultLayout title="Login">
             <Nav/>
             <h1>Register Form</h1>
-            <div class="form">
-                <form action='/' method="POST">
+            <div>
+                <form class="cat-form" action='/' method="POST">
                     <label for="username">Username</label>
                         <input type="text" id="username" name="username"/>
                         <label for="password">Password</label>
                         <input type="password" id="password" name="password"/>
                         <label for="repeatPassword">Re-Password</label>
                         <input type="password" id="repeatPassword" name="repeatPassword"/>
-                        <input type="submit" value="Register"/>
+                        <button className="userbuttons" type="submit">Register</button>
                 </form>
             </div>
 

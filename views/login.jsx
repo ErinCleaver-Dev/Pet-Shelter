@@ -9,13 +9,13 @@ const Login = () => {
         <DefaultLayout title="Login">
             <Nav/>
             <h1>Login Form</h1>
-            <div class="form">
-                <form action='/' method="POST">
+            <div>
+                <form class="cat-form" action='/' method="POST">
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username"/>
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password"/>
-                    <input type="submit" value="Login"/>
+                    <button className="userbuttons" type="submit" value="Login">Login</button>
                 </form>
             </div>
         </DefaultLayout>

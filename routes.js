@@ -4,12 +4,12 @@ const router = Router();
 
 
 //controllers
-const homeController = require('./constrollers/homeController')
-const addPetController = require('./constrollers/addPetController')
-const addBreedController = require('./constrollers/addBreedController')
-const editController = require('./constrollers/editController')
-const deleteController = require('./constrollers/deleteController')
-const userController = require('./constrollers/userController')
+const homeController = require('./controllers/homeController')
+const addPetController = require('./controllers/addPetController')
+const addBreedController = require('./controllers/addBreedController')
+const editController = require('./controllers/editController')
+const deleteController = require('./controllers/deleteController')
+const userController = require('./controllers/userController')
 
 
 

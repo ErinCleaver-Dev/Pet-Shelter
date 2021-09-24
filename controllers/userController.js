@@ -10,10 +10,7 @@ router.get('/login', (req, res) => {
 
 router.get('/register', (req, res) => {
     res.status(200);
-    console.log("login")
-
     res.render('register');
-
 })
 
 module.exports = router;
