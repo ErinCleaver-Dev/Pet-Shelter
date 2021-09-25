@@ -297,3 +297,18 @@ body > form > label:nth-child(3) {
     display: block;
   }
 
+p.from-info {
+text-align: center;
+font-size: 1.4em;
+}
+
+p.from-info a {
+    color: rgb(91, 131, 138);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+p.from-info a:hover {
+    color: rgb(69, 83, 85);
+    text-decoration:underline;
+}
