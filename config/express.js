@@ -20,7 +20,6 @@ const setupExpress = (app) => {
     app.use(express.json())
     app.use(cp());
     app.use(session({secret: 'fosureowafdvcx'}, {httpOnly: true}, {secure: true}))
-    let hashPassword = "";
     /*bcrypt.genSaltSync(config.saltRound, (error, salt) => {
         bcrypt.hash(passwordUnscure, salt, (error, hash) => {
             console.log(passwordUnscure)
@@ -35,23 +34,6 @@ const setupExpress = (app) => {
     })*/
 
     const salt = bcrypt.genSaltSync(config.saltRound);
-    bcrypt.hash(passwordUnscure, salt).then(hash => {
-
-        
-
-        // decryption 
-        bcrypt.compare(passwordUnscure, hash, (error, res)=> {
-            if(res) {
-                console.log('password is true')
-            } else {
-                console.log('incorrct username or password');
-            }
-        })
-
-    })
-
-    
-
 }
 
 module.exports = setupExpress;

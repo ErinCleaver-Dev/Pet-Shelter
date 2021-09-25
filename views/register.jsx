@@ -9,7 +9,7 @@ const Register = () => {
             <Nav/>
             <h1>Register Form</h1>
             <div>
-                <form class="cat-form" action='/' method="POST">
+                <form class="cat-form" action='/register' method="POST">
                     <label for="username">Username</label>
                         <input type="text" id="username" name="username"/>
                         <label for="password">Password</label>

@@ -10,7 +10,7 @@ const Login = () => {
             <Nav/>
             <h1>Login Form</h1>
             <div>
-                <form class="cat-form" action='/' method="POST">
+                <form class="cat-form" action='/login' method="POST">
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username"/>
                     <label for="password">Password</label>
