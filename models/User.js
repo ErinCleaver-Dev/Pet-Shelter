@@ -18,13 +18,13 @@ userSchema.methods = {
     }
 }
 
-userSchema.pre('save', (next)=> {
-    if(!this.isModifid('password')) {
+userSchema.pre('save',  async function (next) {
+    if(!this.isModified('password'))  {
         next();
         return ;
     }
     const salt = bcrypt.genSaltSync(config.saltRound);
-    bcrypt.hash(this.password, salt).then(hash => { 
+    await bcrypt.hash(this.password, salt).then(hash => { 
        this.password = hash;
        next();
     });

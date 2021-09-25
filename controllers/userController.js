@@ -1,7 +1,5 @@
 const {Router} = require('express')
 const User = require('../models/User')
-const bcrypt = require('bcrypt')
-const config = require('../config/')
 const router = Router();
 
 router.get('/login', (req, res) => {
@@ -12,6 +10,31 @@ router.get('/login', (req, res) => {
 
 router.post('/login', (req, res) => {
     // console.log(req.body.username)
+    const {username, password} = req.body;
+
+    User
+        .findOne({username})
+        .then((user) => {
+            return Promise.all([
+                user.comparePasswords(password),user
+            ]);
+        })
+        .then((isValidPassword, user)=>{
+            if(!isValidPassword) {
+                throw new Error(`Invalid password`);
+                return res.redirect(`/login?error=Error`)
+
+            } else if(isValidPassword) {
+                // redirect -> generate token (jwt)
+                res.redirect('/profile')
+            }
+        })
+        .catch((e) => {
+            console.log(e);
+            res.redirect(`/login?error=${e.Error}`)
+        })
+        
+
 })
 
 router.get('/register', (req, res) => {
@@ -20,22 +43,25 @@ router.get('/register', (req, res) => {
 })
 
 router.post('/register', (req, res, next) => {
-    let userinfo = {'username': "", 
-    'password': ""};
+    const {username, password} = req.body;
+
     User
         .findOne({username})
         .then((user) => {
             if(user) {
-                throw new Error("The given account is already in use...");
+                message = "The given account is already in use..."
+                res.redirect(`/register?error=${message}`);
             } else {
                 return User.create({username, password});
             }
         }).then((createdUser) => {
             res.redirect('/login')
+        }).catch((e) => {
+            console.log(e);
+            res.redirect(`/register?error=${e.Error}`)
         })
         
 
-    const {username, password} = req.body;
 
 })
 
