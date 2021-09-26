@@ -16,14 +16,13 @@ router.post('/login', (req, res) => {
         .findOne({username})
         .then((user) => {
             return Promise.all([
-                user.comparePasswords(password)
+                user.comparePasswords(password), user
             ]);
         })
         .then((isValidPassword, user)=>{
-            console.log("testing validation: " + isValidPassword)
-            if(isValidPassword === false) {
+            if(isValidPassword[0] == false) {
                 throw new Error(`Invalid password`);
-            } else {
+            } else if(isValidPassword[0]) {
                 // redirect -> generate token (jwt)
                 res.redirect('/profile')
             }
