@@ -6,6 +6,7 @@ const session = require('express-session');
 const bcrypt = require('bcrypt')
 const passwordUnscure = "pass123"
 const config = require('./')
+const auth = require('../utils/auth')
 
 const setupExpress = (app) => {
     app.use(bp.urlencoded({extended : false}))
@@ -19,6 +20,7 @@ const setupExpress = (app) => {
     app.use(formData.parse())
     app.use(express.json())
     app.use(cp());
+    app.use(auth);
     app.use(session({secret: 'fosureowafdvcx'}, {httpOnly: true}, {secure: true}))
     /*bcrypt.genSaltSync(config.saltRound, (error, salt) => {
         bcrypt.hash(passwordUnscure, salt, (error, hash) => {

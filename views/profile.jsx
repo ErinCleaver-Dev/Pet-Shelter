@@ -8,18 +8,7 @@ const Profile = ({props}) => {
             <Nav/>
             <h1>Profile</h1>
             <div>
-                
-                <form class="cat-form" action='/profile' method="POST">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username"/>
-                    <label for="password">Current Password</label>
-                    <input type="password" id="password" name="password"/>
-                    <label for="password">new Password</label>
-                    <input type="password" id="password" name="password"/>
-                    <label for="repeatPassword">Re-Password</label>
-                    <input type="password" id="repeatPassword" name="repeatPassword"/>
-                    <button className="userbuttons" type="submit" value="Login">Login</button>
-                </form>
+                <p>Logged in, <a href="/logout">Log out</a></p>
             </div>
         </DefaultLayout>
     )

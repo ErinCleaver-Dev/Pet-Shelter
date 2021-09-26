@@ -1,6 +1,7 @@
 import React from 'react';
 
-const Nav = () => {
+const Nav = (props) => {
+    const isLoggedIn = props.isLoggedIn;
     return(
         <header>
         <nav>

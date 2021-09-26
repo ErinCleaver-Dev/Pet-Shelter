@@ -1,6 +1,8 @@
 const {Router} = require('express')
 const User = require('../models/User')
+const jwt = require('../utils/jwt')
 const router = Router();
+const config = require('../config/index')
 
 router.get('/login', (req, res) => {
     res.status(200);
@@ -15,16 +17,23 @@ router.post('/login', (req, res) => {
     User
         .findOne({username})
         .then((user) => {
+
             return Promise.all([
                 user.comparePasswords(password), user
             ]);
         })
-        .then((isValidPassword, user)=>{
-            if(isValidPassword[0] == false) {
+        .then((returnedUserInfo)=>{
+            if(returnedUserInfo[0] == false) {
                 throw new Error(`Invalid password`);
-            } else if(isValidPassword[0]) {
-                // redirect -> generate token (jwt)
-                res.redirect('/profile')
+            } else if(returnedUserInfo[0]) {
+                const user = returnedUserInfo[1]
+                console.log("line 30: ", user._id)
+                const token = jwt.createToken(user._id);
+                console.log(`generate token ${token}`);
+                res
+                    .status(200)
+                    .cookie(config.cookie, token, {maxAge: 60*60*24*30})
+                    .redirect('/profile')
             }
         })
         .catch((e) => {
@@ -34,6 +43,12 @@ router.post('/login', (req, res) => {
         
 
 })
+
+router.get('/logout', (req, res) => {
+    res.clearCookie(config.cookie)
+        .redirect('/')
+
+}) 
 
 router.get('/register', (req, res) => {
     res.status(200);

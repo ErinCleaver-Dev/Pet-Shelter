@@ -1,23 +1,24 @@
 const jwt = require('jsonwebtoken');
-const {secret } = require('../config/');
+const { secret } = require('../config/index')
 
 module.exports = {
-    createToken(_id){
-        const payload = (_id)
-        const options = {expiresIn: '30d'};
-        const token = jwt.sign(payload,secret,options);
+    createToken(_id) {
+        const payloads = { _id };
+        const options = { expiresIn: '30d' };
+        const token = jwt.sign(payloads, secret, options);
         return token;
-    }, verifyToken(token){
+    },
+    verifyToken(token) {
         return new Promise((resolve, reject) => {
-            const decodedToken = jwt.verify(token, secret, (error, payload)=> {
-                if (error) {
-                    reject(error);
+            const decodedToken = jwt.verify(token, secret, (err, payload) => {
+                if (err) {
+                    reject(err);
                     return;
-                } else {
-                    resolve(payload);
                 }
+                //we could load paypload
+                resolve(payload)
             });
         })
-        
+
     }
-}
+};

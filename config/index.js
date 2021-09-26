@@ -8,8 +8,9 @@ const config = {
         petsdb: "petsdb"
     },
     DB_CONNECTION : "mongodb://localhost:27017/petsdb",
-    secert: 'ob5zdn&4BHH?JogG',
-    saltRound: 11
+    secret: 'ob5zdn&4BHH?JogG',
+    saltRound: 11,
+    cookie: 'user'
     
 }
 
