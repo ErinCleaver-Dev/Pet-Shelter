@@ -3,7 +3,7 @@ import Nav from './components/Nav'
 import DefaultLayout from './layouts/default'
 
 
-const AddBreed = ({img, name, alt, breed, description}) => {
+const AddBreed = (props) => {
     return (
         <DefaultLayout title="Add Breed">
             <Nav/>

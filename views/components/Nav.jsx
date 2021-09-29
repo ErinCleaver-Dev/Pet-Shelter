@@ -1,7 +1,9 @@
 import React from 'react';
+import { LocalStorage } from "node-localstorage";
+global.localStorage = new LocalStorage('./scratch');
 
-const Nav = (props) => {
-    const isLoggedIn = props.isLoggedIn;
+const Nav = () => {
+
     return(
         <header>
         <nav>

@@ -14,7 +14,7 @@ const Home = (props) => {
 
     return (
         <DefaultLayout title="Home">
-            <Nav/>
+            <Nav />
             <Search/>
             <main>
                 <section className="cats">

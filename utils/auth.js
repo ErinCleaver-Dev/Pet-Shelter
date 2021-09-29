@@ -1,6 +1,7 @@
 const User = require('../models/User')
 const {verifyToken} =require('./jwt')
 const config = require('../config/index')
+const { localStorage } = require('node-localstorage').LocalStorage;
 
 // authentication middleware
 module.exports = (req, res, next) => {
@@ -15,6 +16,7 @@ module.exports = (req, res, next) => {
                     req.user = {username, _id}
                     res.locals.isLoggedIn = Boolean(_id);
                     res.locals.username = username;
+
                     next();
                 })
             }).catch((e) => next(e));

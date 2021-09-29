@@ -5,10 +5,13 @@ const petService = require('../services/petService')
 
 
 router.get('/', (req, res) => {
-    console.log(req.cookies)
-    console.log("Session obj " + req.session)
-    console.log("Session value " + req.session.message)
 
+    if (typeof localStorage === "undefined" || localStorage === null) {
+        var LocalStorage = require('node-localstorage').LocalStorage;
+        localStorage = new LocalStorage('./scratch');
+      }
+    localStorage.setItem('isLoggedIn', res.locals.isLoggedIn);
+   
     const notice = req.cookies.notice;
 
     petService.getAll().then(pets => {
