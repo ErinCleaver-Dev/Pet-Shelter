@@ -10,7 +10,9 @@ const addBreedController = require('./controllers/addBreedController')
 const editController = require('./controllers/editController')
 const deleteController = require('./controllers/deleteController')
 const userController = require('./controllers/userController')
-
+//apis
+const usersController = require('./controllers/api/users')
+const authController = require('./controllers/api/auth')
 
 
 //instance of router
@@ -24,6 +26,11 @@ router.use(addBreedController)
 router.use(editController)
 router.use(deleteController)
 router.use(userController)
+
+// api controllers.
+router.use(usersController)
+router.use(authController)
+
 
 module.exports = router;
 
