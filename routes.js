@@ -29,7 +29,7 @@ router.use(userController)
 
 // api controllers.
 router.use(usersController)
-router.use(authController)
+//router.use(authController)
 
 
 module.exports = router;

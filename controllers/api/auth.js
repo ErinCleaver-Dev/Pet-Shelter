@@ -1,6 +1,9 @@
+const {Router} = require('express')
 const jwt = require('../../utils/jwt')
+const router = Router();
 
-router.post('/api/authentication', (req, res, next) => {
+
+router.post('/api/authentication', (req, res) => {
     // console.log(req.body.username)
     const {username, password} = req.body;
 
