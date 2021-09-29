@@ -6,7 +6,10 @@ const config = require('../../config/index')
 const {check, validationResult} = require('express-validator/check')
 
 
-router.post('/api/register', (req, res, next) => {
+router.post('/api/register',[
+    check('username', "please include a valid username!").notEmpty(),
+    check('password', "Please enter a passwrd with 6 or more").isLength({min: 6, max: 24}),
+], (req, res, next) => {
     const {username, password} = {...req.body};
 
     User
