@@ -1,17 +1,16 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
+const config = require('./index')
 
-const config = require('./')
-
-const setupMongoose = (app) => {
+function setupMongoose(app) {
 
     mongoose.connect(config.DB_CONNECTION).then(() => {
-        console.log('Database is connected');
+        console.log('Database is connected')
     })
 
     const db = mongoose.connection;
-    db.on('error', console.error.bind(console, 'connection failed'));
-    db.on('open', console.log.bind(console, 'connection open'))
+    db.on('error', console.error.bind(console, 'connection error'))
+    db.on('open', console.log.bind(console, 'connection is opened'))
 
 }
 
-module.exports = setupMongoose;
+module.exports = setupMongoose

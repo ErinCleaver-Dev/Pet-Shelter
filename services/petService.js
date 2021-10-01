@@ -1,28 +1,18 @@
-const Pet = require('../models/Pets')
+const Pet = require('../models/Pet')
 
-async function getAll(){
+async function getAll() {
     return await Pet.find({}).lean();
 }
 
-async function create(data){
+async function create(data) {
     let pet = new Pet(data);
-    return await pet.save(pet).then(result => {console.log(`pet saved!! ${result}`)})
+
+    return await pet.save().then(result => {
+        console.log('pet saved!!')
+    })
 }
-
-async function getId(id) {
-    return await Pet.find({_id: id}).lean();
-}
-
-async function deletePet(id) {
-    console.log("testing delete " + id);
-    return await Pet.remove({_id: id}).then(result => {console.log("test " + result)});
-}
-
-
 
 module.exports = {
-    getAll: getAll,
-    create: create,
-    getId: getId,
-    deletePet: deletePet,
+    getAll,
+    create
 }

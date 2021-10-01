@@ -1,17 +1,12 @@
 const config = {
-    development : {
-        port: 8000,
-
+    development: {
+        port: process.env.PORT || 5000
     },
-    production : {},
-    db_name: {
-        petsdb: "petsdb"
-    },
-    DB_CONNECTION : "mongodb://localhost:27017/petsdb",
+    production: {},
+    DB_CONNECTION: "mongodb://localhost:27017/petsdb",
+    saltRounds: 11,
     secret: 'ob5zdn&4BHH?JogG',
-    saltRound: 11,
-    cookie: 'user'
-    
+    cookie: 'x-auth-token'
 }
 
-module.exports = config;
+module.exports = config

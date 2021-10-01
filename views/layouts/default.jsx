@@ -14,6 +14,9 @@ export default class DefaultLayout extends Component {
                     <title>{this.props.title}</title>
                 </head>
                 <body>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.js"></script>
+                <div id="js-app"></div>
                     {this.props.children}
                 </body>
             </html>

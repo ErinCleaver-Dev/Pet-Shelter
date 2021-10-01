@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
-
 * {
     margin: 0;
     padding: 0;
 }
 
-html, body {
+html,
+body {
     font-family: 'Lato', sans-serif;
     background-color: #e4f2f7;
     color: #333;
@@ -32,7 +32,7 @@ html, body {
 }
 
 .navigation li:nth-child(2) a::before {
-    content: "\f055";   
+    content: "\f055";
 }
 
 .navigation li:nth-child(3) a::before {
@@ -59,7 +59,11 @@ form {
     margin-top: 1rem;
 }
 
-input[type=text], input[type="file"], input[type="number"], input[type="password"], textarea, select {
+input[type=text],
+input[type="file"],
+input[type="number"],
+textarea,
+select {
     padding: 0.5rem 7.5rem 0.5rem 1rem;
     border-radius: 7px;
     border: none;
@@ -124,14 +128,14 @@ form button:hover {
     margin-top: 1.5rem;
     position: relative;
     left: 1rem;
-    border:1px splid black;
+    border: 1px splid black;
 }
 
 .buttons li {
     margin-left: 2rem;
 }
 
-.cats ul li .buttons .btn a{
+.cats ul li .buttons .btn a {
     text-align: center;
     padding: 5px;
     border-radius: 17px;
@@ -141,15 +145,13 @@ form button:hover {
     margin-bottom: 1rem;
 }
 
-
-.cats ul li .buttons .edit a{
+.cats ul li .buttons .edit a {
     background-color: #3d99e3;
 }
 
-.cats ul li .buttons .delete a{
+.cats ul li .buttons .delete a {
     background-color: #ff0000d6;
 }
-
 
 .cats li img {
     width: 350px;
@@ -167,7 +169,7 @@ form button:hover {
     border-radius: 7px;
 }
 
-body > form > label:nth-child(3) {
+body>form>label:nth-child(3) {
     margin-top: 1.5rem;
 }
 
@@ -207,7 +209,7 @@ body > form > label:nth-child(3) {
     margin: 0 0 0.3rem 0.3rem;
 }
 
-.cat-form button{
+.cat-form button {
     width: 100px;
     margin: auto;
     text-align: center;
@@ -223,8 +225,9 @@ body > form > label:nth-child(3) {
 
 
 /*Cookies*/
-.notice-cookies{
-    display:none;
+
+.notice-cookies {
+    display: none;
     background-color: #fff;
     padding: 20px;
     width: calc(100% - 40px);
@@ -235,28 +238,30 @@ body > form > label:nth-child(3) {
     bottom: 20px;
     left: 20px;
     z-index: 100;
-    padding-top:60px;
-    box-shadow: 0px 2px 20px 10px rgba(222,222,222,.25);
+    padding-top: 60px;
+    box-shadow: 0px 2px 20px 10px rgba(222, 222, 222, .25);
     text-align: center;
-  }
-  
-  .notice-cookies.active-cookies{
+}
+
+.notice-cookies.active-cookies {
     display: block;
-  }
-  
-  .notice-cookies .img-cookies{
+}
+
+.notice-cookies .img-cookies {
     max-width: 100px;
     position: absolute;
     top: -50px;
     left: calc(50% - 50px);
-  }
-  
-  .notice-cookies .title-cookies, .paragraph{
+}
+
+.notice-cookies .title-cookies,
+.paragraph {
     margin-bottom: 15px;
-  }
-  
-  .notice-cookies .btn-cookies{
-    width: 100%;
+}
+
+.notice-cookies .btn-cookies {
+    display: block;
+    width: 85%;
     background-color: #595959;
     border: none;
     color: #fff;
@@ -267,48 +272,263 @@ body > form > label:nth-child(3) {
     transition: .3s ease all;
     border-radius: 5px;
     margin-bottom: 15px;
-  }
-  
-  .notice-cookies .btn-cookies:hover{
+}
+
+.notice-cookies .btn-cookies:hover {
     background-color: #000;
-  }
-  
-  .notice-cookies .link {
-    color:#000#4dbfff;
+}
+
+.notice-cookies .link {
+    color: #000#4dbfff;
     text-decoration: none;
-  }
-  
-  .notice-cookies .link:hover {
+}
+
+.notice-cookies .link:hover {
     text-decoration: underline;
-  }
-  
-  .notice-cookies-background{
+}
+
+.notice-cookies-background {
     display: none;
-    background: rgba(0,0,0,.60);
+    background: rgba(0, 0, 0, .60);
     position: fixed;
     z-index: 99;
     width: 100vw;
     height: 100vh;
-    top:0;
-    left:0;
-  }
-  
-  .notice-cookies-background.active-cookies{
-    display: block;
-  }
-
-p.from-info {
-text-align: center;
-font-size: 1.4em;
+    top: 0;
+    left: 0;
 }
 
-p.from-info a {
-    color: rgb(91, 131, 138);
-    text-decoration: none;
+.notice-cookies-background.active-cookies {
+    display: block;
+}
+
+form {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+form div input,
+label {
+    margin: 0 auto;
+    color: var(--main-blue);
+    text-align: center;
+}
+
+form div label {
+    font-weight: bold;
+}
+
+form div input {
+    padding: 1%;
+    width: 50%;
+    text-align: center;
+    font-size: 18px;
+    border: none;
+    border-bottom: 1px solid var(--main-blue);
+}
+
+form div {
+    padding: 1%;
+    margin-bottom: 2%;
+}
+
+form textarea {
+    color: var(--main-blue);
+    width: 50%;
+    padding: 2%;
+    border: 1px solid var(--main-blue);
+    resize: none;
+    height: 15vh;
+    overflow: hidden;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.offer-details {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.offer-details img {
+    /* border:1px solid purple; */
+    max-width: 500px;
+}
+
+.offer-details div.info div.description {
+    border-radius: 15px;
+    /* border: 1px solid var(--main-blue); */
+    color: var(--main-blue);
+    padding: 2%;
+    font-size: 20px;
+    text-align: justify;
+}
+
+.offer-details div.actions {
+    color: var(--main-blue);
+    width: 100%;
+    padding: 2%;
+}
+
+.offer-details div.actions a {
+    padding: 1%;
+    border: 1px solid var(--main-blue);
+    background: var(--main-blue);
+    color: white;
+    border-radius: 5px;
     cursor: pointer;
 }
 
-p.from-info a:hover {
-    color: rgb(69, 83, 85);
-    text-decoration:underline;
+p.price {
+    color: var(--main-blue);
+    font-weight: bold;
+}
+
+.offer-details div.actions button:hover {
+    color: var(--main-orange);
+}
+
+.offer-details img {
+    display: block;
+    margin: 0 auto;
+    border-radius: 15px;
+    /* border: 1px solid var(--main-blue); */
+}
+
+form select {
+    width: 30%;
+    border: 1px solid var(--main-blue);
+    color: var(--main-blue);
+    padding: 0.5%;
+    font-weight: bold;
+    border-radius: 15px;
+    text-align: center;
+}
+
+form select option {
+    text-align: center;
+    border-radius: 15px;
+    color: var(--main-blue);
+}
+
+main {
+    width: 100%;
+    color: var(--main-blue);
+}
+
+main h1 {
+    padding: 2%;
+}
+
+main .about-us {
+    padding: 1%;
+    width: 100%;
+}
+
+main .about-us div {
+    display: flex;
+}
+
+main .about-us div img {
+    width: 200px;
+    border-radius: 15px;
+    flex: 1;
+    vertical-align: top;
+}
+
+main .about-us h1 {
+    text-align: left;
+    color: var(--main-blue);
+}
+
+main .about-us p {
+    padding: 2%;
+    font-size: 18px;
+}
+
+main .container {
+    padding: 1%;
+    display: flex;
+    color: var(--main-blue);
+    background-color: white;
+}
+
+main .container p,
+.form-info {
+    text-align: center;
+    color: var(--main-blue);
+}
+
+main .container p a,
+.form-info a {
+    text-align: center;
+    font-weight: bold;
+    text-decoration: underline;
+    color: var(--main-orange);
+}
+
+main .container p a:hover,
+.form-info a {
+    text-decoration: none;
+}
+
+main p.message {
+    width: 100%;
+    text-align: center;
+    color: darkred;
+    font-style: italic;
+    margin: 1%;
+}
+
+form div button {
+    padding: 2%;
+    width: 20%;
+    border: 1px solid var(--main-blue);
+    background-color: white;
+    color: var(--main-orange);
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.user-info>div:nth-child(1) {
+    text-align: center;
+    margin: 2%;
+}
+
+.user-info p a {
+    color: darkred;
+    text-decoration: none;
+}
+
+.user-info p a:hover {
+    text-decoration: underline;
+}
+
+.user-info .total-profit {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 32px;
+}
+
+span {
+    color: var(--main-orange);
+}
+
+.user-info div:nth-child(1) p {
+    display: inline-block;
+    color: var(--main-blue);
+    font-weight: bold;
+}
+
+.user-info div:nth-child(1) p span {
+    color: var(--main-orange);
+}
+
+form div button:hover {
+    border: 1px solid white;
+    border-bottom: 1px solid var(--main-orange);
+    color: var(--main-blue);
+    text-decoration: underline;
+    cursor: pointer;
 }

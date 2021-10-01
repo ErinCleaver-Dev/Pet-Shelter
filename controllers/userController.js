@@ -1,87 +1,99 @@
-const {Router} = require('express')
+const { Router } = require('express')
+const router = Router()
 const User = require('../models/User')
 const jwt = require('../utils/jwt')
-const router = Router();
-const config = require('../config/index')
+const { cookie } = require('../config/index')
+router.get('/user/login', (req, res) => {
+    res.render('login')
+});
 
-router.get('/login', (req, res) => {
-    res.status(200);
-    res.render('login');
+router.get('/user/register', (req, res) => {
+    res.render('register')
+});
 
-})
+router.get('/user/logout', (req, res) => {
 
-router.post('/login', (req, res) => {
-    // console.log(req.body.username)
-    const {username, password} = req.body;
+    if (typeof localStorage === "undefined" || localStorage === null) {
+        var LocalStorage = require('node-localstorage').LocalStorage;
+        localStorage = new LocalStorage('./scratch');
+    }
 
+    localStorage.clear();
+
+    res.clearCookie(cookie).redirect('/')
+
+
+});
+
+router.post('/user/register', (req, res, next) => {
+    const { fullName, email, password } = {...req.body }
     User
-        .findOne({username})
+        .findOne({ email })
         .then((user) => {
+
+            if (user) {
+                const msg = 'The given email is already in use...';
+                res.redirect(`/user/register?error=${msg}`)
+
+            } else {
+
+                return User.create({ email, fullName, password })
+            }
+
+        }).then((createdUser) => {
+
+            res.redirect('/user/login')
+        }).catch((e) => {
+
+            console.log(e);
+            res.redirect(`/user/register?error`)
+        })
+
+    console.log('redirect test 3')
+
+
+});
+
+
+router.post('/user/login', (req, res, next) => {
+    const { email, password } = {...req.body }
+    User
+        .findOne({ email }).then((user) => {
 
             return Promise.all([
                 user.comparePasswords(password), user
-            ]);
-        })
-        .then((returnedUserInfo)=>{
-            if(returnedUserInfo[0] == false) {
-                throw new Error(`Invalid password`);
-            } else if(returnedUserInfo[0]) {
-                const user = returnedUserInfo[1]
-                console.log("line 30: ", user._id)
-                const token = jwt.createToken(user._id);
-                console.log(`generate token ${token}`);
-                res
-                    .status(200)
-                    .cookie(config.cookie, token, {maxAge: 60*60*24*30})
-                    .redirect('/profile')
+            ])
+        }).then((returnedPasswordAndUser) => {
+
+            if (!returnedPasswordAndUser[0]) {
+                throw new Error('Invalid password!!')
             }
+            const _user = returnedPasswordAndUser[1]
+                // console.log("information ", _user)
+                //redirect ->generate a token (jwt)
+
+            const token = jwt.createToken(_user._id);
+            console.log(`generated token ${token}`);
+            res
+                .status(200)
+                .cookie(cookie, token, { maxAge: 3600000 })
+                .redirect(`/user/profile`)
+
         })
         .catch((e) => {
+
             console.log(e);
-            res.redirect(`/login?error=${e.Error}`)
+            res.redirect(`/user/register?error`)
         })
-        
 
-})
-
-router.get('/logout', (req, res) => {
-    res.clearCookie(config.cookie)
-        .redirect('/')
-
-}) 
-
-router.get('/register', (req, res) => {
-    res.status(200);
-    res.render('register');
-})
-
-router.post('/register', (req, res, next) => {
-    const {username, password} = req.body;
-
-    User
-        .findOne({username})
-        .then((user) => {
-            if(user) {
-                message = "The given account is already in use..."
-                res.redirect(`/register?error=${message}`);
-            } else {
-                return User.create({username, password});
-            }
-        }).then((createdUser) => {
-            res.redirect('/login')
-        }).catch((e) => {
-            console.log(e);
-            res.redirect(`/register?error=${e.Error}`)
-        })
-        
+    console.log('redirect test 3')
 
 
-})
+});
 
-router.get('/profile', (req, res) => {
-    res.status(200);
-    res.render('profile');
-})
+router.get('/user/profile', (req, res) => {
+    res.render('profile')
+});
 
 
-module.exports = router;
+module.exports = router

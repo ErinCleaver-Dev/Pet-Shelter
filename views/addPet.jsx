@@ -3,11 +3,11 @@ import Nav from './components/Nav'
 import DefaultLayout from './layouts/default'
 
 
-const AddPet = (props) => {
+const AddPet = ({img, name, alt, breed, description}) => {
     return (
         <DefaultLayout title="Add Pet">
             <Nav/>
-            <form action="/addPet" method="POST" class="cat-form" enctype="multipart/form-data">
+            <form action="/AddPet" method="POST" class="cat-form" enctype="multipart/form-data">
                 <h2>Add Cat</h2>
                 <label for="name">Name</label>
                 <input name="name" type="text" id="name"/>

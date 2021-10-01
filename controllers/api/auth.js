@@ -1,38 +1,51 @@
-const {Router} = require('express')
+const { Router } = require('express')
+const router = Router()
+const User = require('../../models/User')
 const jwt = require('../../utils/jwt')
-const router = Router();
+const { cookie } = require('../../config/index')
 
 
-router.post('/api/authentication', (req, res) => {
-    // console.log(req.body.username)
-    const {username, password} = req.body;
 
+
+
+
+router.post('/api/auth', (req, res, next) => {
+    const { email, password } = {...req.body }
     User
-        .findOne({username})
-        .then((user) => {
+        .findOne({ email }).then((user) => {
 
             return Promise.all([
                 user.comparePasswords(password), user
-            ]);
-        })
-        .then((returnedUserInfo)=>{
-            if(returnedUserInfo[0] == false) {
-                throw new Error(`Invalid password`);
-            } else if(returnedUserInfo[0]) {
-                const user = returnedUserInfo[1]
-                console.log("line 30: ", user._id)
-                const token = jwt.createToken(user._id);
-                console.log(`generate token ${token}`);
-                res
-                    .status(200)
-                    .cookie(config.cookie, token, {maxAge: 60*60*24*30})
-                    .redirect('/profile')
+            ])
+        }).then((returnedPasswordAndUser) => {
+
+            if (!returnedPasswordAndUser[0]) {
+                throw new Error('Invalid password!!')
             }
+            const _user = returnedPasswordAndUser[1]
+                // console.log("information ", _user)
+                //redirect ->generate a token (jwt)
+
+            const token = jwt.createToken(_user._id);
+            console.log(`generated token ${token}`);
+            res
+                .status(200)
+                .cookie(cookie, token, { maxAge: 3600000 })
+                .redirect(`/user/profile`)
+
         })
         .catch((e) => {
-            console.log(e);
-            res.redirect(`/login?error=${e.Error}`)
-        })
-        
 
-})
+            console.log(e);
+            res.redirect(`/user/register?error`)
+        })
+
+    console.log('redirect test 3')
+
+
+});
+
+
+
+
+module.exports = router

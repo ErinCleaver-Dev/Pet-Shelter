@@ -3,21 +3,21 @@ import Nav from './components/Nav'
 import DefaultLayout from './layouts/default'
 
 
-const Edit = ({pet}) => {
+const Edit = ({img, name, alt, breed, description}) => {
     return (
         <DefaultLayout title="Edit Cat">
             <Nav/>
-            <form action="" method="POST" class="cat-form" enctype="multipart/form-data">
+            <form action="" class="cat-form" enctype="multipart/form-data">
                 <h2>Edit Cat</h2>
                 <label for="name">Name</label>
-                <input type="text" id="name" value={pet[0].name}/>
+                <input type="text" id="name" value="Pretty Cat"/>
                 <label for="description">Description</label>
-                <textarea id="description">{pet[0].description}</textarea>
+                <textarea id="description">Dominant and aggressive to other cats. Will probably eat you in your sleep. Very cute tho.</textarea>
                 <label for="image">Image</label>
-                <input type="file" id="image" value="{pet[0].img}"/> 
-                <label for="group"></label>
+                <input type="file" id="image"/>
+                <label for="group">Breed</label>
                 <select id="group">
-                    <option value={pet[0].breed}>{pet[0].breed}</option>
+                    <option value="Fluffy Cat">Fluffy Cat</option>
                 </select>
                 <button>Edit Cat</button>
             </form>

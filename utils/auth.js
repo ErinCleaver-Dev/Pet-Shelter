@@ -1,24 +1,24 @@
 const User = require('../models/User')
-const {verifyToken} =require('./jwt')
-const config = require('../config/index')
-const { localStorage } = require('node-localstorage').LocalStorage;
+const { secret } = require('../config/index')
+const { verifyToken } = require('./jwt')
+const { cookie } = require('../config/index')
 
-// authentication middleware
+//authentication middleware
 module.exports = (req, res, next) => {
-        const token = req.cookies[config.cookies] || '';
-        if(!token) {
-            next();
-            return;
-        } else {
-            verifyToken(token)
-            .then(({_id})=> { User.findOne({_id})
-                .then (({username, _id})=> {
-                    req.user = {username, _id}
-                    res.locals.isLoggedIn = Boolean(_id);
-                    res.locals.username = username;
+    const token = req.cookies[cookie] || '';
 
-                    next();
-                })
-            }).catch((e) => next(e));
-        }
+    if (!token) {
+        next();
+        return;
     }
+
+    verifyToken(token)
+        .then(({ _id }) => User.findOne({ _id })
+            .then(({ email, fullName, _id }) => {
+                req.user = { email, fullName, _id };
+                res.locals.isLoggedIn = Boolean(email);
+                res.locals.fullname = fullName;
+                next();
+            }))
+        .catch((e) => next(e));
+}

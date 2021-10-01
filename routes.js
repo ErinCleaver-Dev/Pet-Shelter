@@ -1,36 +1,35 @@
-const {Router} = require('express')
-const router = Router();
-
-
-
-//controllers
+const { Router } = require('express')
+const router = Router()
+    //mvc -> Model, View, Controller
+    //controllers (home,pet)
 const homeController = require('./controllers/homeController')
-const addPetController = require('./controllers/addPetController')
-const addBreedController = require('./controllers/addBreedController')
-const editController = require('./controllers/editController')
-const deleteController = require('./controllers/deleteController')
+const petController = require('./controllers/petController')
 const userController = require('./controllers/userController')
+
 //apis
 const usersController = require('./controllers/api/users')
 const authController = require('./controllers/api/auth')
 
-
 //instance of router
+//use controller (link controller to router)
+//export router
 
-//use controller (link controller to router) 
-//export router 
+router.use('/', homeController) //default controller
+router.use(petController) //adding controllers
+router.use(userController) //adding controllers
+    //apis controllers
+router.use(usersController) //adding controllers
+router.use(authController) //adding controllers
 
-router.use(homeController)
-router.use(addPetController)
-router.use(addBreedController)
-router.use(editController)
-router.use(deleteController)
-router.use(userController)
+/*
+module.exports = (router) => {
+    return routers.reduce((acc, curr) => {
+        const key = Object.keys(curr)[0];
+        return Object.assign(acc, {
+            [key]: curr[key](router)
+        });
+    }, {});
+};*/
 
-// api controllers.
-router.use(usersController)
-//router.use(authController)
 
-
-module.exports = router;
-
+module.exports = router

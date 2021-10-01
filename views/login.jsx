@@ -3,24 +3,27 @@ import Nav from './components/Nav'
 import DefaultLayout from './layouts/default'
 
 
-const Login = () => {
-    console.log("login")
+const Login = ({}) => {
     return (
         <DefaultLayout title="Login">
             <Nav/>
-            <h1>Login Form</h1>
-            <div>
-                <p class="from-info">If you do not have an account click on <a href="/register">Register now.</a>
-                   
-                </p>
-                <form class="cat-form" action='/login' method="POST">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username"/>
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password"/>
-                    <button className="userbuttons" type="submit" value="Login">Login</button>
-                </form>
-            </div>
+            <h1>Login</h1>
+<p class="form-info">Don't have account?
+    <a href="/user/register">Register now</a> and fix that!
+</p>
+<form action="/user/login" method="POST" class="cat-form">
+    <div>
+        <input type="email" name="email" placeholder="Email..." />
+    </div>
+
+    <div>
+        <input type="password" name="password" placeholder="Password..." />
+    </div>
+    <div>
+        <p class="message"></p>
+        <button type="submit">Login</button>
+    </div>
+</form>
         </DefaultLayout>
     )
 }

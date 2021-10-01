@@ -1,41 +1,53 @@
 const express = require('express');
-const cors = require('cors')()
+const cors = require('cors')
 const bp = require('body-parser')
-const cp = require('cookie-parser')
-const session = require('express-session');
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
+const config = require('./index')
 const bcrypt = require('bcrypt')
-const passwordUnscure = "pass123"
-const config = require('./')
 const auth = require('../utils/auth')
 
-const setupExpress = (app) => {
-    app.use(bp.urlencoded({extended : false}))
+function setupExpress(app) {
+    app.use(bp.urlencoded({ extended: false }))
+
     app.use(bp.json())
-    //app.set('views', __dirname + '/views');
+
+    app.use(cors())
+        // app.set('views', __dirname + '/views');
     app.use(express.static('public'))
-    // view engine, set view engine (files, instance)
+        // view engine, set view engine (files, instance)
     app.set('view engine', 'jsx')
     app.engine('jsx', require('express-react-views').createEngine());
-    const formData = require('express-form-data');
+
+    const formData = require('express-form-data')
     app.use(formData.parse())
     app.use(express.json())
-    app.use(cp());
-    app.use(auth);
-    app.use(session({secret: 'fosureowafdvcx'}, {httpOnly: true}, {secure: true}))
-    /*bcrypt.genSaltSync(config.saltRound, (error, salt) => {
-        bcrypt.hash(passwordUnscure, salt, (error, hash) => {
-            console.log(passwordUnscure)
-            hashPassword = hash;
-        })
-    }).then(hash=> {
-        if(passwordUnscure === hashPassword) {
-            console.log('password is true')
-        } else {
-            console.log('incorrct password or username');
-        }
-    })*/
+    app.use(cookieParser())
+    app.use(session({ secret: 'faemskjnasfkojn' }, { httpOnly: true }, { secure: true }))
+    app.use(auth)
+    const password = 'pass123'
+        //encrypt - make the password unreadable
+        //salt
+    const salt = bcrypt.genSaltSync(config.saltRounds);
+    bcrypt.hash(password, salt).then(hash => {
+            console.log(`Password { ${password} - Hashed One { ${hash}}}`);
+            //$2b$11$7A.U.peyMv03xKOfc./x1ui79MClxrcSw4RuFLWEwRbOZY/Xumyze -> pass123
+            //$2b$11$V4alVDn6D4egxA2V4B/hEua88kGlMsyyi9yE/lfCjMjicdWVd0e7O -> pass123
+            //$2b$11$mW/aQx9FVv3P4ovckQ6ofORPhpPYMNFGHW6v2mxRIGhhE9r6vUa/S -> pass123
 
-    const salt = bcrypt.genSaltSync(config.saltRound);
+        })
+        //decrypt - retrieve it back to its initial value
+
+    bcrypt.compare(password, '$2b$11$V4alVDn6D4egxA2V4B/hEua88kGlMsyyi9yE/lfCjMjicdWVd0e7O', (err, res) => {
+        if (res) {
+            console.log('password is Matched!!')
+                //login the user
+        } else {
+            console.log('incorrct username or password :(');
+            //redirect the user to home page
+        }
+    })
+
 }
 
-module.exports = setupExpress;
+module.exports = setupExpress

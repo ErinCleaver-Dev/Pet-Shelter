@@ -1,32 +1,53 @@
-const {Router} = require('express')
-
-const router = Router();
+//routes /, /about, /contact
+const { Router } = require('express')
+const router = Router()
 const petService = require('../services/petService')
 
 
 router.get('/', (req, res) => {
 
+
+    console.log('isLoggedIn =>' + res.locals.isLoggedIn)
+
+
     if (typeof localStorage === "undefined" || localStorage === null) {
         var LocalStorage = require('node-localstorage').LocalStorage;
         localStorage = new LocalStorage('./scratch');
-      }
-    localStorage.setItem('isLoggedIn', res.locals.isLoggedIn);
-   
-    const notice = req.cookies.notice;
+    }
 
+    localStorage.setItem('isLoggedIn', res.locals.isLoggedIn)
+
+
+    console.log(req.cookies);
+    console.log(req.session);
+    console.log("Session Value " + req.session.message);
+    const cookiesTerms = req.cookies.cookiesTerms;
     petService.getAll().then(pets => {
-        res.render('home', {pets : pets, notice: notice});
-    }).catch(() => res.status(500).end)
+
+        res.render('home', { pets: pets, cookiesTerms: cookiesTerms })
+
+    }).catch(() => res.status(500).end())
+
+
+});
+
+
+router.get('/setCookies', (req, res) => {
+    res.cookie('cookiesTerms', 'ok')
+    req.session.message = "Hello"
+    res.redirect('/?cookiesadded=true')
 });
 
 router.get('/clearCookies', (req, res) => {
-    res.cookie("notice", null);
-    res.redirect('/?clearCookies=true');
-})
-router.get('/agreeCookie', (req, res) => {
-    res.cookie("notice", "yes");
-    req.session.message = "AddMessage"
-    res.redirect('/');
-})
+    req.session.message = null
+    res.cookie('cookiesTerms', null)
+    res.redirect('/?cookiesadded=false')
 
-module.exports = router;
+});
+
+
+router.get('/about', (req, res) => {
+    res.send('About US')
+});
+
+module.exports = router
