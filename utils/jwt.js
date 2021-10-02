@@ -8,6 +8,12 @@ module.exports = {
         const token = jwt.sign(payloads, secret, options);
         return token;
     },
+    createApiToken(_id) {
+        const payloads = { user: {id:_id} };
+        const options = { expiresIn: '30d' };
+        const token = jwt.sign(payloads, secret, options);
+        return token;
+    },
     verifyToken(token) {
         return new Promise((resolve, reject) => {
             const decodedToken = jwt.verify(token, secret, (err, payload) => {

@@ -2,48 +2,54 @@ const { Router } = require('express')
 const router = Router()
 const User = require('../../models/User')
 const jwt = require('../../utils/jwt')
+const bcrypt  = require('bcrypt')
 const { cookie } = require('../../config/index')
+const { check, validationResult } = require('express-validator/check')
 
 
+router.post('/api/user', [
+    check('email', "please include a valid email!").isEmail(),
+    check('password', "please enter a password with 6 or more characters").isLength({ min: 6 }),
+], async(req, res) => {
 
 
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() })
+    }
 
-
-router.post('/api/auth', (req, res, next) => {
     const { email, password } = {...req.body }
-    User
-        .findOne({ email }).then((user) => {
+    try {
+        let user = await User.findOne({ email: email});
+        let errorMessage = "Invaild credentials"
+        //First check if their is a user
+        if(!user) {
+            return res.status(400).json({ errors: [{msg: errorMessage}]}) 
+        }
+        //Secound check if their is a user
+        const isMatched = await bcrypt().compare(password, user.password)
+        //Third assume inaild password 
+        if(!isMatched) {
+            return res.status(400).json({ errors: [{msg: errorMessage}]}) 
+        } 
+        //4-user is logged in
+        else {
+             const token = jwt.createApiToken(user._id);
 
-            return Promise.all([
-                user.comparePasswords(password), user
-            ])
-        }).then((returnedPasswordAndUser) => {
-
-            if (!returnedPasswordAndUser[0]) {
-                throw new Error('Invalid password!!')
-            }
-            const _user = returnedPasswordAndUser[1]
-                // console.log("information ", _user)
-                //redirect ->generate a token (jwt)
-
-            const token = jwt.createToken(_user._id);
-            console.log(`generated token ${token}`);
-            res
-                .status(200)
-                .cookie(cookie, token, { maxAge: 3600000 })
-                .redirect(`/user/profile`)
-
-        })
-        .catch((e) => {
-
-            console.log(e);
-            res.redirect(`/user/register?error`)
-        })
+        }
+       
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Server error")
+    }
 
     console.log('redirect test 3')
 
 
 });
+
+
+
 
 
 
