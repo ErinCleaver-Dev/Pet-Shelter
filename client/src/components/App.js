@@ -1,31 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
 import React, {Component} from 'react'
-import FormControlLabel from '@mui/material/FormControlLabel';
-import {Paper}from '@mui/material';
 import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
-import Input from '@mui/material/Input';
-import FilledInput from '@mui/material/FilledInput';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
-import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
-import TextField from '@mui/material/TextField';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Divider from '@mui/material/Divider';
-import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-
+import Navbar from './Navbar'
+import {Redirect} from 'react-router-dom'
 function TabPanel(props) {
 
 
@@ -72,6 +62,7 @@ function BasicTabs() {
     password: '',
     weight: '',
     weightRange: '',
+    redirectTo:null,
     showPassword: false,
     signinOrRegister:'signin'
   });
@@ -142,7 +133,7 @@ function BasicTabs() {
 
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: '100%', paddingTop: '100px', display: "flex", flexDirection: "column", alignItems: "center" }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 
       <ToggleButtonGroup
@@ -297,7 +288,7 @@ class App extends Component {
 
     return (
       <div className="App">
-  <BasicTabs />
+      <BasicTabs />
       </div>
     )
 
