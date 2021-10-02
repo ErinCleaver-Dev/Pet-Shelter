@@ -63,6 +63,8 @@ function BasicTabs() {
     weight: '',
     weightRange: '',
     redirectTo:null,
+    user: null,
+    loggedIn: false,
     showPassword: false,
     signinOrRegister:'signin'
   });
@@ -105,10 +107,6 @@ function BasicTabs() {
   const register = (event)=>{
     event.preventDefault();
     console.log(values.email)
-
-  
-
-   
     
     axios.post('http://localhost:5000/api/register',{
       fullName:values.fullName,
@@ -124,10 +122,38 @@ function BasicTabs() {
     .catch(function (error) {
       console.log(error);
     });
+
+  };
+
+  const auth = (event)=>{
+    event.preventDefault();
+    console.log(values.email)
+    
+    axios.post('http://localhost:5000/api/auth',{
+      email:values.email,
+      password:values.password
+    })
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      if(response.status === 400 || response.status === 500) {
+        console.log('Error:  Invalid authentication')
+      }
+
+      else if(response.status === 200){
+        console.log('user authencticated')
+        //1-load data from token
+        //2-save user in local storage
+        //3-redirect user
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
     
   
 
   };
+ 
  
 
 

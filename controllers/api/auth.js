@@ -35,6 +35,7 @@ router.post('/api/user', [
         //4-user is logged in
         else {
              const token = jwt.createApiToken(user._id);
+             res.json({token})
 
         }
        
