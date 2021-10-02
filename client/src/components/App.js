@@ -138,12 +138,19 @@ function BasicTabs() {
       if(response.status === 400 || response.status === 500) {
         console.log('Error:  Invalid authentication')
       }
-
+      //1-load data from token
       else if(response.status === 200){
         console.log('user authencticated')
-        //1-load data from token
+        setValues({...values, 
+          loggedIn: true, 
+          user: response.data
+        })
+
         //2-save user in local storage
+        localStorage.setItem('user', JSON.stringify(response.data))
+
         //3-redirect user
+        
       }
     })
     .catch(function (error) {
