@@ -99,8 +99,8 @@ function BasicTabs() {
   const login = (event)=>{
     event.preventDefault();
     console.log('login '+ values.email)
-
-  
+    
+    
 
   };
 
@@ -128,6 +128,7 @@ function BasicTabs() {
   const auth = (event)=>{
     event.preventDefault();
     console.log(values.email)
+    console.log(values.username)
     
     axios.post('http://localhost:5000/api/auth',{
       email:values.email,
@@ -143,14 +144,15 @@ function BasicTabs() {
         console.log('user authencticated')
         setValues({...values, 
           loggedIn: true, 
-          user: response.data
+          user: response.data,
+          redirectTo: '/'
         })
 
         //2-save user in local storage
         localStorage.setItem('user', JSON.stringify(response.data))
 
         //3-redirect user
-        
+
       }
     })
     .catch(function (error) {
@@ -163,7 +165,11 @@ function BasicTabs() {
  
  
 
-
+  if(values.redirectTo) {
+    return(
+      <Redirect to={{ pathname: values.redirectTo}} />
+    )
+  } else {
 
   return (
     <Box sx={{ width: '100%', paddingTop: '100px', display: "flex", flexDirection: "column", alignItems: "center" }}>
@@ -187,7 +193,7 @@ function BasicTabs() {
        <Divider>Login</Divider>
 
 
-<form method="post" onSubmit={login}>
+<form method="post" onSubmit={auth}>
 <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-email">Email</InputLabel>
           <OutlinedInput
@@ -300,11 +306,12 @@ function BasicTabs() {
             label="Register"
           >{'Register'}
         </Button >
-</form>
+    </form>
       </div>
 
     </Box>
   );
+  }
 }
 
 
