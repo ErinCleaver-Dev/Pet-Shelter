@@ -12,6 +12,10 @@ const petScheme = new mongoose.Schema({
         default: default_image,
         set(value) { return default_image }
     },
+    image: {
+        type: Buffer,
+        contentType: String,
+    },
     breed: { type: String, required: true, maxlength: 50 },
     description: { type: String, required: true, maxlength: 150 },
 });

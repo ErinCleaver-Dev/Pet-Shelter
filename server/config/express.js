@@ -6,6 +6,8 @@ const session = require('express-session')
 const config = require('./index')
 const bcrypt = require('bcrypt')
 const auth = require('../utils/auth')
+const fs = require('fs')
+const path = require('path')
 
 function setupExpress(app) {
     app.use(bp.urlencoded({ extended: false }))
