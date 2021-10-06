@@ -1,6 +1,6 @@
 const config = {
     development: {
-        port: 5000
+        port: process.env.PORT || 5000
     },
     production: {},
     DB_CONNECTION: "mongodb://localhost:27017/petsdb",

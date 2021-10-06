@@ -1,3 +1,4 @@
+import './App.css';
 import React, {Component} from 'react'
 import PropTypes from 'prop-types';
 import Typography from '@mui/material/Typography';
@@ -14,8 +15,8 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import Navbar from './Navbar'
 import {Redirect} from 'react-router-dom'
+
 function TabPanel(props) {
 
 
@@ -60,11 +61,9 @@ function BasicTabs() {
     fullName:'',
     email:'',
     password: '',
-    weight: '',
-    weightRange: '',
     redirectTo:null,
-    user: null,
-    loggedIn: false,
+    user:null,
+    loggedIn:false,
     showPassword: false,
     signinOrRegister:'signin'
   });
@@ -98,15 +97,48 @@ function BasicTabs() {
 
   const login = (event)=>{
     event.preventDefault();
-    console.log('login '+ values.email)
-    
-    
+  //  console.log('login '+ values.email)
+  //  console.log('password '+ values.password)
+//return;
+
+    axios.post('http://localhost:5000/api/auth',{
+      email:values.email,
+      password:values.password
+    })
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      if( response.status === 400 || response.status === 500){
+      console.log('invalid authentication')
+      }
+
+     else if(response.status === 200 ){
+        console.log('user is authenticated')
+        setValues({ ...values, 
+          loggedIn : true,
+          user:response.data,
+          redirectTo:'/'
+        });
+        localStorage.setItem('user',JSON.stringify(response.data))
+//1-load data from token
+//2-save user in storage
+//3-redirect the user
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+
 
   };
 
   const register = (event)=>{
     event.preventDefault();
     console.log(values.email)
+
+  
+
+   
     
     axios.post('http://localhost:5000/api/register',{
       fullName:values.fullName,
@@ -117,41 +149,6 @@ function BasicTabs() {
       console.log(JSON.stringify(response.data));
       if(response.data.token){
         console.log('user registered')
-      }
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-
-  };
-
-  const auth = (event)=>{
-    event.preventDefault();
-    console.log(values.email)
-    console.log(values.username)
-    
-    axios.post('http://localhost:5000/api/auth',{
-      email:values.email,
-      password:values.password
-    })
-    .then(function (response) {
-      console.log(JSON.stringify(response.data));
-      if(response.status === 400 || response.status === 500) {
-        console.log('Error:  Invalid authentication')
-      }
-      //1-load data from token
-      else if(response.status === 200){
-        console.log('user authencticated')
-        setValues({...values, 
-          loggedIn: true, 
-          user: response.data,
-          redirectTo: '/'
-        })
-
-        //2-save user in local storage
-        localStorage.setItem('user', JSON.stringify(response.data))
-
-        //3-redirect user
 
       }
     })
@@ -163,16 +160,14 @@ function BasicTabs() {
 
   };
  
- 
 
-  if(values.redirectTo) {
-    return(
-      <Redirect to={{ pathname: values.redirectTo}} />
-    )
-  } else {
+
+if(values.redirectTo){
+  return (<Redirect to={{pathname: values.redirectTo}} />)
+} else {
 
   return (
-    <Box sx={{ width: '100%', paddingTop: '100px', display: "flex", flexDirection: "column", alignItems: "center" }}>
+    <Box sx={{ width: '100%',paddingTop:'80px;' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 
       <ToggleButtonGroup
@@ -193,7 +188,7 @@ function BasicTabs() {
        <Divider>Login</Divider>
 
 
-<form method="post" onSubmit={auth}>
+<form method="post" onSubmit={login}>
 <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-email">Email</InputLabel>
           <OutlinedInput
@@ -306,12 +301,14 @@ function BasicTabs() {
             label="Register"
           >{'Register'}
         </Button >
-    </form>
+</form>
       </div>
 
     </Box>
   );
-  }
+
+}
+
 }
 
 
@@ -328,7 +325,7 @@ class App extends Component {
 
     return (
       <div className="App">
-      <BasicTabs />
+  <BasicTabs />
       </div>
     )
 

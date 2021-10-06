@@ -3,7 +3,7 @@ import Nav from './components/Nav'
 import DefaultLayout from './layouts/default'
 
 
-const AddPet = ({img, name, alt, breed, description}) => {
+const AddPet = () => {
     return (
         <DefaultLayout title="Add Pet">
             <Nav/>
@@ -14,7 +14,7 @@ const AddPet = ({img, name, alt, breed, description}) => {
                 <label for="description">Description</label>
                 <textarea name="description" id="description"></textarea>
                 <label for="image">Image</label>
-                <input name="upload" type="file" id="image"/>
+                <input name="upload" type="file" id="image" multiple/>
                 <label for="group">Breed</label>
                 <select name="breed" id="group">
                     <option value="Fluffy Cat">Fluffy Cat</option>

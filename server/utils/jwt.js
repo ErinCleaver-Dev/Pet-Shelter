@@ -9,7 +9,7 @@ module.exports = {
         return token;
     },
     createApiToken(_id) {
-        const payloads = { user: {id:_id} };
+        const payloads = { user: { id: _id } };
         const options = { expiresIn: '30d' };
         const token = jwt.sign(payloads, secret, options);
         return token;

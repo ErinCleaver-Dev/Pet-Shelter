@@ -1,7 +1,6 @@
 import React from 'react'
 import styles from './navbar.module.css'
 import {Link} from 'react-router-dom'
-
 const Navbar = () =>{
 
     let user = JSON.parse(localStorage.getItem('user'));
@@ -18,13 +17,14 @@ console.log(user)
           }}>
            <Link className={styles["brand-style"]} to="/" >Client</Link>
 
+         
            </div>
           <div style={{
               display:"flex",
               minWidth:"15rem",
               alignItems:'center',
-              justifyContent:"flex-end",
-              paddingRight: "20px"
+              paddingRight:'15px',
+              justifyContent:"flex-end"
               
           }}>
 

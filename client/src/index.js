@@ -3,21 +3,35 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
 import Home from './components/Home';
-import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
-import Navbar from './components/Navbar';
+import {BrowserRouter as Router,Route, Switch,Redirect} from 'react-router-dom'
+import Navbar from './components/Navbar/index'
+import axios from 'axios'
 
 ReactDOM.render(
+  <Router>
+    <Navbar />
+    <Route exact path="/" component={Home} />
+    <Switch>
+    <Route exact path="/account" component={App} />
+    <Route exact path="/logout" render={() =>     
+    {      
+      axios.get('http://localhost:5000/api/logout').then(resp => {
+      if(resp.status ===200) {
+        localStorage.removeItem('user');
+        console.log('user logged out')
+        return(<Redirect to="/" component={App}/>);
+      }
 
- <Router>
-   <Navbar/>
-   <Switch>
-     <Route exact path="/" component={Home} />
-     <Route exact path="/Account" component={App} />
-   </Switch>
- </Router>,
+      });
+      return (
+      // Write logic
+      <Redirect to="/"/>
+    )}} />
+    </Switch>
+  </Router>
+   
+,
   document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+
