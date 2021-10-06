@@ -7,6 +7,7 @@ const config = require('./index')
 const bcrypt = require('bcrypt')
 const auth = require('../utils/auth')
 const fs = require('fs')
+const fileUpload = require("express-fileupload");
 const path = require('path')
 
 function setupExpress(app) {
@@ -20,7 +21,7 @@ function setupExpress(app) {
         // view engine, set view engine (files, instance)
     app.set('view engine', 'jsx')
     app.engine('jsx', require('express-react-views').createEngine());
-
+    app.use(fileUpload({createParentPath: true,}))
     const formData = require('express-form-data')
     app.use(formData.parse())
     app.use(express.json())

@@ -8,6 +8,12 @@ const petService = require('../services/petService')
     });
     */
 
+    let multer = require('multer');
+    const fs = require('fs')
+    const path = require('path')
+
+    const upload = multer({dest: "public/files"})
+
 router.get('/AddPet', (req, res) => {
 
     res.cookie("message", "hello")
@@ -16,33 +22,33 @@ router.get('/AddPet', (req, res) => {
 
 });
 
-router.post('/AddPet', (req, res, next) => {
-    let multer = require('multer');
-    const fs = require('fs')
-    const path = require('path')
+router.post('/AddPet', upload.single('upload'), (req, res, next) => {
+    
+    //console.log(req)
 
-    let storage = multer.deskStorage({
-        destination: (req, file, cb) => {
-            cb(null, 'uploads')
-        },
-        filename: (req, file, cb) => {
-            cb(null, file.filename + '-' + Date.now());
-        }
-    })
 
-    var upload = multer({storage: storage})
 
-    let obj = { 
+    console.log(req)
+    /*let obj = { 
         name: req.body.name,
         description: req.body.description,
         breed:  req.body.breed,
-        upload: req.body.file
-    }
+        image: {
+            data: fs.readFileSync(path.join('./uploads/' + req.files.upload.name)), 
+            contentType: 'image/png'
+        }
+    }*/
 
-    petService.create(req.body).then(() => {
-        res.redirect('/')
+    //console.log(obj)
+    /*
+    petService.create(obj).then((error, item) => {
+        if(error) {
+            console.log(error)
+        } else {
+            res.redirect('/')
+        }
     }).catch(next)
-
+    */
 });
 
 module.exports = router
