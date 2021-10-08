@@ -18,6 +18,9 @@ const petScheme = new mongoose.Schema({
     },
     breed: { type: String, required: true, maxlength: 50 },
     description: { type: String, required: true, maxlength: 150 },
+    owner : {type: mongoose.Types.ObjectId,
+        ref: "User"
+        }
 });
 
 module.exports = mongoose.model('Pet', petScheme)

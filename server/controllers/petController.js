@@ -24,12 +24,12 @@ router.get('/AddPet', (req, res) => {
 
 router.post('/AddPet', upload.single('upload'), (req, res, next) => {
     
-    //console.log(req)
+    console.log("add pet 1", req)
 
 
 
     console.log(req)
-    /*let obj = { 
+    let obj = { 
         name: req.body.name,
         description: req.body.description,
         breed:  req.body.breed,
@@ -37,10 +37,10 @@ router.post('/AddPet', upload.single('upload'), (req, res, next) => {
             data: fs.readFileSync(path.join('./uploads/' + req.files.upload.name)), 
             contentType: 'image/png'
         }
-    }*/
+    }
 
     //console.log(obj)
-    /*
+    
     petService.create(obj).then((error, item) => {
         if(error) {
             console.log(error)
@@ -48,7 +48,7 @@ router.post('/AddPet', upload.single('upload'), (req, res, next) => {
             res.redirect('/')
         }
     }).catch(next)
-    */
+    
 });
 
 module.exports = router

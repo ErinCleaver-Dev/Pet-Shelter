@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors')
-const bp = require('body-parser')
+//const bp = require('body-parser')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const config = require('./index')
@@ -11,9 +11,7 @@ const fileUpload = require("express-fileupload");
 const path = require('path')
 
 function setupExpress(app) {
-    app.use(bp.urlencoded({ extended: false }))
-
-    app.use(bp.json())
+    app.use(express.urlencoded({ extended: false }))
 
     app.use(cors())
         // app.set('views', __dirname + '/views');

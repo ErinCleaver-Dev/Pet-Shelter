@@ -2,6 +2,11 @@ import React from 'react';
 import Nav from './components/Nav'
 import DefaultLayout from './layouts/default'
 
+// Import the functions you need from the SDKs you need
+
+
+
+  
 
 const Login = ({}) => {
     return (
@@ -22,10 +27,12 @@ const Login = ({}) => {
     <div>
         <p class="message"></p>
         <button type="submit">Login</button>
+        <button id="googleLogin" type="button">Login google id</button>
     </div>
-</form>
+    </form>
+        
+
         </DefaultLayout>
     )
 }
-
 module.exports = Login;
